@@ -5,20 +5,24 @@
 #!/bin/bash
 
 IMAGES=()
+CONTAINERS=()
 COMPOSE_FILE=""
 SERVICE=$1
 
 case $SERVICE in
     roma)
     IMAGES=("teic/xquery4roma" "teic/roma")
+    CONTAINERS=("xquery4roma" "roma")
     COMPOSE_FILE=docker-compose_roma.yml
     ;;
     romabeta)
     IMAGES=("teic/romajs")
+    CONTAINERS=("romabeta")
     COMPOSE_FILE=docker-compose_romabeta.yml
     ;;
     oxgarage)
     IMAGES=("teic/oxgarage")
+    CONTAINERS=("oxgarage")
     COMPOSE_FILE=docker-compose_oxgarage.yml
     ;;
     *)
@@ -29,7 +33,7 @@ esac
 
 echo "*************************"
 echo stopping service $SERVICE
-docker-compose -f $COMPOSE_FILE down
+for container in ${CONTAINERS[@]} ; do docker kill $container ; done
 
 echo "*************************"
 echo pulling images
