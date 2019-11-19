@@ -1,0 +1,43 @@
+version: '3.5'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    container_name: nginx-proxy
+    networks:
+      - tei
+    environment:
+      - ENABLE_IPV6=true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx-proxy-certs:/etc/nginx/certs:ro
+      - nginx-proxy-vhost:/etc/nginx/vhost.d
+      - nginx-proxy-html:/usr/share/nginx/html
+    restart: unless-stopped
+
+  le-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: le-companion
+    networks:
+      - tei
+    environment:
+      - DEFAULT_EMAIL=stadler@edirom.de
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx-proxy-certs:/etc/nginx/certs
+      - nginx-proxy-vhost:/etc/nginx/vhost.d
+      - nginx-proxy-html:/usr/share/nginx/html
+    restart: unless-stopped
+
+volumes:
+  nginx-proxy-certs:
+  nginx-proxy-vhost:
+  nginx-proxy-html:
+
+networks:
+  tei:
+    name: tei_net

@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  romabeta:
+    image: teic/romajs
+    container_name: romabeta
+    environment:
+      - OXGARAGE_LOCATION=oxgarage-humanum.tei-c.org
+      - OXGARAGE_PROTOCOL=https
+      - VIRTUAL_HOST=romabeta-humanum.tei-c.org
+      - LETSENCRYPT_HOST=romabeta-humanum.tei-c.org
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_EMAIL=stadler@edirom.de
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: tei_net
+
