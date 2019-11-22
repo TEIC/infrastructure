@@ -10,8 +10,8 @@ services:
       - OXGARAGE_SERVER=https://oxgarage-humanum.tei-c.org/ege-webservice
       - ROMA_XQUERY_SERVER=http://xquery4roma:8080/Query/
       - ROMA_TEIWEB_SERVER=https://tei-c.org/release/doc/tei-p5-doc/
-      - VIRTUAL_HOST=roma-humanum.tei-c.org
-      - LETSENCRYPT_HOST=roma-humanum.tei-c.org
+      - VIRTUAL_HOST=roma-humanum.tei-c.org,roma.tei-c.org
+      - LETSENCRYPT_HOST=roma-humanum.tei-c.org,roma.tei-c.org
       - VIRTUAL_PORT=80
       - LETSENCRYPT_EMAIL=stadler@edirom.de
     restart: unless-stopped
