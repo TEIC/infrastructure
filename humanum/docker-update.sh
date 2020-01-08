@@ -32,12 +32,12 @@ case $SERVICE in
 esac
 
 echo "*************************"
-echo stopping service $SERVICE
-for container in ${CONTAINERS[@]} ; do docker kill $container ; done
+echo pulling updated images
+for image in ${IMAGES[@]} ; do docker pull $image ; done
 
 echo "*************************"
-echo pulling images
-for image in ${IMAGES[@]} ; do docker pull $image ; done
+echo stopping service $SERVICE
+for container in ${CONTAINERS[@]} ; do docker kill $container ; done
 
 echo "*************************"
 echo do some cleaning
