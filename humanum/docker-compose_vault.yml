@@ -5,7 +5,7 @@ services:
     image: nginx:alpine
     container_name: vault
     volumes:
-      - /data2/web/tei-c.dhinstitute.ca/public_html/Vault:/usr/share/nginx/html:ro
+      - /data2/Vault:/usr/share/nginx/html:ro
       - /etc/nginx/vault.tei-c.org.conf:/etc/nginx/conf.d/default.conf:ro
     environment:
       - VIRTUAL_HOST=vault.tei-c.org

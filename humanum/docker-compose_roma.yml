@@ -5,7 +5,7 @@ services:
     image: teic/roma
     container_name: roma
     volumes:
-      - /data/vault/xml/tei/custom:/usr/share/xml/tei/custom:ro
+      - /data2/Vault/P5/current/xml/tei/custom:/usr/share/xml/tei/custom:ro
     environment:
       - OXGARAGE_SERVER=https://oxgarage-humanum.tei-c.org/ege-webservice
       - ROMA_XQUERY_SERVER=http://xquery4roma:8080/Query/

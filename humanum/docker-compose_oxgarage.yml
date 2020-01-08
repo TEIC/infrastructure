@@ -5,8 +5,8 @@ services:
     image: teic/oxgarage
     container_name: oxgarage
     volumes:
-      - /data/vault/xml/tei/stylesheet:/usr/share/xml/tei/stylesheet:ro
-      - /data/vault/xml/tei/odd:/usr/share/xml/tei/odd:ro
+      - /data2/Vault/Stylesheets/current/xml/tei/stylesheet:/usr/share/xml/tei/stylesheet:ro
+      - /data2/Vault/P5/current/xml/tei/odd:/usr/share/xml/tei/odd:ro
     environment:
       - WEBSERVICE_URL=https://oxgarage-humanum.tei-c.org/ege-webservice/
       - VIRTUAL_HOST=oxgarage-humanum.tei-c.org,oxgarage.tei-c.org
