@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  ojs:
+    image: stadlerpeter/docker-pkp-ojs:3.2.0
+    container_name: ojs
+    volumes:
+      - ojsdb:/var/lib/mysql
+    environment:
+      - PKP_DATABASE_DRIVER=mysqli
+      - PKP_DATABASE_HOST=ojsdb
+      - PKP_DATABASE_USERNAME=jtei_ojs3-test
+      - PKP_DATABASE_NAME=jtei_ojs3-test
+      - PKP_DATABASE_PASSWORD=
+      - VIRTUAL_HOST=journal.tei-c.de
+      - LETSENCRYPT_HOST=journal.tei-c.de
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_EMAIL=stadler@edirom.de
+    restart: unless-stopped
+
+  ojsdb:
+    image: mariadb:10
+    container_name: ojsdb
+    volumes:
+      - ojsdb:/var/lib/mysql
+      - /data/tmp:/docker-entrypoint-initdb.d:ro
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: tei_net
+
