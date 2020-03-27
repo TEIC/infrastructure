@@ -31,6 +31,9 @@ services:
       - /data/tmp:/docker-entrypoint-initdb.d:ro
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_USER=jtei_ojs3-test
+      - MYSQL_DATABASE=jtei_ojs3-test      
+      - MYSQL_PASSWORD=
     restart: unless-stopped
 
 networks:
