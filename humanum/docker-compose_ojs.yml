@@ -1,18 +1,15 @@
-version: '3'
+version: '3.7'
 
 services:
   ojs:
     image: stadlerpeter/docker-pkp-ojs:3.2.0
     container_name: ojs
     volumes:
-      - /data/lib/ojsfiles:/var/www/html/files
-      - /data/lib/ojspublic:/var/www/html/public
+      - /data/docker-volumes/ojsfiles:/var/www/html/files
+      - /data/docker-volumes/ojspublic:/var/www/html/public
     environment:
       - PKP_DATABASE_DRIVER=mysqli
       - PKP_DATABASE_HOST=ojsdb
-      - PKP_DATABASE_USERNAME=jtei_ojs3-test
-      - PKP_DATABASE_NAME=jtei_ojs3-test
-      - PKP_DATABASE_PASSWORD=
       - PKP_GENERAL_INSTALLED=yes
       - PKP_GENERAL_BASE_URL=https://journal.tei-c.de
       - HACK_BASE_URL=true
@@ -21,23 +18,41 @@ services:
       - VIRTUAL_PORT=80
       - LETSENCRYPT_EMAIL=stadler@edirom.de
     restart: unless-stopped
+    secrets:
+      - source: db_passwd
+        target: PKP_DATABASE_PASSWORD
+      - source: db_username
+        target: PKP_DATABASE_USERNAME
+      - source: db_name
+        target: PKP_DATABASE_NAME
 
   ojsdb:
     image: mariadb:10
     container_name: ojsdb
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-      - /data/lib/ojsdb:/var/lib/mysql
+      - /data/docker-volumes/ojsdb:/var/lib/mysql
       - /data/tmp:/docker-entrypoint-initdb.d:ro
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_USER=jtei_ojs3-test
-      - MYSQL_DATABASE=jtei_ojs3-test      
-      - MYSQL_PASSWORD=
+      - MYSQL_USER_FILE=/run/secrets/db_username
+      - MYSQL_DATABASE_FILE=/run/secrets/db_name
+      - MYSQL_PASSWORD_FILE=/run/secrets/db_passwd
     restart: unless-stopped
+    secrets:
+      - source: db_passwd
+      - source: db_username
+      - source: db_name
 
 networks:
   default:
     external:
       name: tei_net
 
+secrets:
+  db_passwd:
+    file: /data/docker-secrets/ojs-db-password
+  db_username:
+    file: /data/docker-secrets/ojs-db-username
+  db_name:
+    file: /data/docker-secrets/ojs-db-name
