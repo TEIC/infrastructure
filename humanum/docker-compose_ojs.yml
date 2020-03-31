@@ -34,6 +34,8 @@ services:
         target: PKP_CAPTCHA_RECAPTCHA_PRIVATE_KEY
       - source: ojs_recaptcha_public_key
         target: PKP_CAPTCHA_RECAPTCHA_PUBLIC_KEY
+      - source: ojs_salt
+        target: PKP_SECURITY_SALT
 
   ojsdb:
     image: mariadb:10
@@ -69,3 +71,5 @@ secrets:
     file: /data/docker-secrets/recaptcha-private-key
   ojs_recaptcha_public_key:
     file: /data/docker-secrets/recaptcha-public-key
+  ojs_salt:
+    file: /data/docker-secrets/ojs-salt
