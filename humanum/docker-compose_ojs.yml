@@ -15,6 +15,8 @@ services:
       - PKP_EMAIL_SMTP=On
       - PKP_EMAIL_SMTP_SERVER=relay.huma-num.fr
       - PKP_EMAIL_SMTP_PORT=25
+      - PKP_CAPTCHA_RECAPTCHA=On
+      - PKP_CAPTCHA_ON_REGISTER=On
       - HACK_BASE_URL=true
       - VIRTUAL_HOST=journal.tei-c.de
       - LETSENCRYPT_HOST=journal.tei-c.de
@@ -28,6 +30,10 @@ services:
         target: PKP_DATABASE_USERNAME
       - source: db_name
         target: PKP_DATABASE_NAME
+      - source: ojs_recaptcha_private_key
+        target: PKP_CAPTCHA_RECAPTCHA_PRIVATE_KEY
+      - source: ojs_recaptcha_public_key
+        target: PKP_CAPTCHA_RECAPTCHA_PUBLIC_KEY
 
   ojsdb:
     image: mariadb:10
@@ -59,3 +65,7 @@ secrets:
     file: /data/docker-secrets/ojs-db-username
   db_name:
     file: /data/docker-secrets/ojs-db-name
+  ojs_recaptcha_private_key:
+    file: /data/docker-secrets/recaptcha-private-key
+  ojs_recaptcha_public_key:
+    file: /data/docker-secrets/recaptcha-public-key
