@@ -13,6 +13,7 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /data/docker-volumes/proxy-max-body-size.conf:/etc/nginx/conf.d/proxy-max-body-size.conf:ro
       - nginx-proxy-certs:/etc/nginx/certs:ro
       - nginx-proxy-vhost:/etc/nginx/vhost.d
       - nginx-proxy-html:/usr/share/nginx/html
