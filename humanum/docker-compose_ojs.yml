@@ -12,6 +12,9 @@ services:
       - PKP_DATABASE_HOST=ojsdb
       - PKP_GENERAL_INSTALLED=yes
       - PKP_GENERAL_BASE_URL=https://journal.tei-c.de
+      - PKP_EMAIL_SMTP=On
+      - PKP_EMAIL_SMTP_SERVER=relay.huma-num.fr
+      - PKP_EMAIL_SMTP_PORT=25
       - HACK_BASE_URL=true
       - VIRTUAL_HOST=journal.tei-c.de
       - LETSENCRYPT_HOST=journal.tei-c.de
