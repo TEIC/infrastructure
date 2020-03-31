@@ -15,6 +15,7 @@ services:
       - PKP_EMAIL_SMTP=On
       - PKP_EMAIL_SMTP_SERVER=relay.huma-num.fr
       - PKP_EMAIL_SMTP_PORT=25
+      - PKP_EMAIL_REQUIRE_VALIDATION=On
       - PKP_CAPTCHA_RECAPTCHA=On
       - PKP_CAPTCHA_ON_REGISTER=On
       - HACK_BASE_URL=true
