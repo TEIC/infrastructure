@@ -19,7 +19,6 @@ services:
       - PKP_CAPTCHA_RECAPTCHA=On
       - PKP_CAPTCHA_ON_REGISTER=On
       - PKP_GENERAL_SCHEDULED_TASKS=On
-      - HACK_BASE_URL=true
       - VIRTUAL_HOST=journal.tei-c.de
       - LETSENCRYPT_HOST=journal.tei-c.de
       - VIRTUAL_PORT=80
