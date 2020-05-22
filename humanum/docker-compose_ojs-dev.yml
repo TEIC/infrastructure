@@ -1,17 +1,17 @@
 version: '3.7'
 
 services:
-  ojs:
+  ojs-dev:
     image: teic/docker-pkp-ojs:3.2.0
-    container_name: ojs
+    container_name: ojs-dev
     volumes:
-      - /data/docker-volumes/ojsfiles:/var/www/html/files
-      - /data/docker-volumes/ojspublic:/var/www/html/public
+      - /data/docker-volumes/ojsfiles-dev:/var/www/html/files
+      - /data/docker-volumes/ojspublic-dev:/var/www/html/public
     environment:
       - PKP_DATABASE_DRIVER=mysqli
-      - PKP_DATABASE_HOST=ojsdb
+      - PKP_DATABASE_HOST=ojsdb-dev
       - PKP_GENERAL_INSTALLED=yes
-      - PKP_GENERAL_BASE_URL=https://journal.tei-c.org
+      - PKP_GENERAL_BASE_URL=https://dev.journal.tei-c.org
       - PKP_EMAIL_SMTP=On
       - PKP_EMAIL_SMTP_SERVER=relay.huma-num.fr
       - PKP_EMAIL_SMTP_PORT=25
@@ -19,8 +19,8 @@ services:
       - PKP_CAPTCHA_RECAPTCHA=On
       - PKP_CAPTCHA_ON_REGISTER=On
       - PKP_GENERAL_SCHEDULED_TASKS=On
-      - VIRTUAL_HOST=journal.tei-c.org
-      - LETSENCRYPT_HOST=journal.tei-c.org
+      - VIRTUAL_HOST=dev.journal.tei-c.org
+      - LETSENCRYPT_HOST=dev.journal.tei-c.org
       - VIRTUAL_PORT=80
       - LETSENCRYPT_EMAIL=stadler@edirom.de
     restart: unless-stopped
@@ -38,11 +38,12 @@ services:
       - source: ojs_salt
         target: PKP_SECURITY_SALT
 
-  ojsdb:
+  ojsdb-dev:
     image: mariadb:10
-    container_name: ojsdb
+    container_name: ojsdb-dev
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-      - /data/docker-volumes/ojsdb:/var/lib/mysql
+      - /data/docker-volumes/ojsdb-dev:/var/lib/mysql
       - /data/tmp:/docker-entrypoint-initdb.d:ro
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
@@ -62,14 +63,14 @@ networks:
 
 secrets:
   db_passwd:
-    file: /data/docker-secrets/ojs-db-password
+    file: /data/docker-secrets/ojs-db-password-dev
   db_username:
-    file: /data/docker-secrets/ojs-db-username
+    file: /data/docker-secrets/ojs-db-username-dev
   db_name:
-    file: /data/docker-secrets/ojs-db-name
+    file: /data/docker-secrets/ojs-db-name-dev
   ojs_recaptcha_private_key:
     file: /data/docker-secrets/ojs-recaptcha-private-key
   ojs_recaptcha_public_key:
     file: /data/docker-secrets/ojs-recaptcha-public-key
   ojs_salt:
-    file: /data/docker-secrets/ojs-salt
+    file: /data/docker-secrets/ojs-salt-dev
