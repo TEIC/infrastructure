@@ -19,6 +19,7 @@ services:
       - PKP_CAPTCHA_RECAPTCHA=On
       - PKP_CAPTCHA_ON_REGISTER=On
       - PKP_GENERAL_SCHEDULED_TASKS=On
+      - PKP_SECURITY_ALLOWED_HTML="a[href|target|title],em,strong,cite,code,ul,ol,li[class],dl,dt,dd,b,i,u,img[src|alt],sup,sub,br,p"
       - VIRTUAL_HOST=dev.journal.tei-c.org
       - LETSENCRYPT_HOST=dev.journal.tei-c.org
       - VIRTUAL_PORT=80
