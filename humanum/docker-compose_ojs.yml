@@ -46,6 +46,7 @@ services:
   ojsdb:
     image: mariadb:10
     container_name: ojsdb
+    command: --character-set-server=latin1 --collation-server=latin1_bin
     volumes:
       - /data/docker-volumes/ojsdb:/var/lib/mysql
       - /data/tmp:/docker-entrypoint-initdb.d:ro
