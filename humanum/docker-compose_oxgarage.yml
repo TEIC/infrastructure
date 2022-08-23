@@ -9,8 +9,8 @@ services:
       - /data2/Vault/P5/current/xml/tei/odd:/usr/share/xml/tei/odd:ro
     environment:
       - WEBSERVICE_URL=https://oxgarage-humanum.tei-c.org/ege-webservice/
-      - VIRTUAL_HOST=oxgarage-humanum.tei-c.org,oxgarage.tei-c.org
-      - LETSENCRYPT_HOST=oxgarage-humanum.tei-c.org,oxgarage.tei-c.org
+      - VIRTUAL_HOST=oxgarage-humanum.tei-c.org,oxgarage.tei-c.org,teigarage.tei-c.org
+      - LETSENCRYPT_HOST=oxgarage-humanum.tei-c.org,oxgarage.tei-c.org,teigarage.tei-c.org
       - VIRTUAL_PORT=8081
       - LETSENCRYPT_EMAIL=stadler@edirom.de
     restart: unless-stopped
