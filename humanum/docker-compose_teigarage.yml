@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  oxgarage:
+    image: teic/teigarage
+    container_name: teigarage
+    environment:
+      - WEBSERVICE_URL=https://teigarage.tei-c.org/ege-webservice/
+      - VIRTUAL_HOST=teigarage.tei-c.org
+      - LETSENCRYPT_HOST=teigarage.tei-c.org
+      - VIRTUAL_PORT=8081
+      - LETSENCRYPT_EMAIL=stadler@edirom.de
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: tei_net
