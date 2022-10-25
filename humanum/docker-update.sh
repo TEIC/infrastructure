@@ -42,7 +42,8 @@ for image in ${IMAGES[@]} ; do docker pull $image ; done
 
 echo "*************************"
 echo stopping service $SERVICE
-for container in ${CONTAINERS[@]} ; do docker kill $container ; done
+#for container in ${CONTAINERS[@]} ; do docker kill $container ; done
+docker-compose -f $COMPOSE_FILE down
 
 echo "*************************"
 echo do some cleaning
