@@ -25,6 +25,11 @@ case $SERVICE in
     CONTAINERS=("oxgarage")
     COMPOSE_FILE=docker-compose_oxgarage.yml
     ;;
+    teigarage)
+    IMAGES=("teic/teigarage")
+    CONTAINERS=("teigarage")
+    COMPOSE_FILE=docker-compose_teigarage.yml
+    ;;
     *)
     echo ERROR: unknown service \"$SERVICE\"
     exit 1
