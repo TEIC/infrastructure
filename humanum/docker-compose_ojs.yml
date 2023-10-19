@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   ojs:
-    image: teic/docker-pkp-ojs:3.2.0
+    image: teic/docker-pkp-ojs:3.4.0
     container_name: ojs
     volumes:
       - /data/docker-volumes/ojsfiles:/var/www/html/files
@@ -10,8 +10,12 @@ services:
     environment:
       - PKP_DATABASE_DRIVER=mysqli
       - PKP_DATABASE_HOST=ojsdb
+      - PKP_DATABASE_CONNECTION_CHARSET=utf8mb4
+      - PKP_DATABASE_COLLATION=utf8mb4_unicode_ci
+      - PKP_I18N_CONNECTION_CHARSET=utf8mb4
       - PKP_GENERAL_INSTALLED=yes
       - PKP_GENERAL_BASE_URL=https://journal.tei-c.org
+      - PKP_EMAIL_DEFAULT=smtp
       - PKP_EMAIL_SMTP=On
       - PKP_EMAIL_SMTP_SERVER=relay.huma-num.fr
       - PKP_EMAIL_SMTP_PORT=25
@@ -46,7 +50,7 @@ services:
   ojsdb:
     image: mariadb:10
     container_name: ojsdb
-    command: --character-set-server=latin1 --collation-server=latin1_bin
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - /data/docker-volumes/ojsdb:/var/lib/mysql
       - /data/tmp:/docker-entrypoint-initdb.d:ro
