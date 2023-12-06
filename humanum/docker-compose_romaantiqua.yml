@@ -7,7 +7,7 @@ services:
     volumes:
       - /data2/Vault/P5/current/xml/tei/custom:/usr/share/xml/tei/custom:ro
     environment:
-      - OXGARAGE_SERVER=https://oxgarage-humanum.tei-c.org/ege-webservice
+      - OXGARAGE_SERVER=https://teigarage.tei-c.org/ege-webservice
       - ROMA_XQUERY_SERVER=http://xquery4roma:8080/Query/
       - ROMA_TEIWEB_SERVER=https://tei-c.org/release/doc/tei-p5-doc/
       - VIRTUAL_HOST=romaantiqua.tei-c.org
