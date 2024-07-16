@@ -5,7 +5,7 @@ services:
     image: teic/romajs
     container_name: roma
     environment:
-      - OXGARAGE_LOCATION=oxgarage-humanum.tei-c.org
+      - OXGARAGE_LOCATION=teigarage.tei-c.org
       - OXGARAGE_PROTOCOL=https
       - VIRTUAL_HOST=roma-humanum.tei-c.org,romabeta.tei-c.org,roma.tei-c.org
       - LETSENCRYPT_HOST=roma-humanum.tei-c.org,romabeta.tei-c.org,roma.tei-c.org
