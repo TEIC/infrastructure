@@ -14,6 +14,19 @@ services:
       - VIRTUAL_PORT=8081
       - LETSENCRYPT_EMAIL=stadler@edirom.de
     restart: unless-stopped
+    labels:
+      autoheal: true
+
+  autoheal:
+    image: willfarrell/autoheal:latest
+    container_name: teigarage-autoheal
+    network_mode: none
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      AUTOHEAL_CONTAINER_LABEL: autoheal
 
 networks:
   default:
