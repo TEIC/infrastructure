@@ -15,7 +15,7 @@ services:
       - LETSENCRYPT_EMAIL=stadler@edirom.de
     restart: unless-stopped
     labels:
-      autoheal: true
+      autoheal: "true"
 
   autoheal:
     image: willfarrell/autoheal:latest
