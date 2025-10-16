@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   ojs-dev:
-    image: teic/docker-pkp-ojs:3.4.0
+    image: teic/docker-pkp-ojs:3.5.0
     container_name: ojs-dev
     volumes:
       - /data/docker-volumes/ojsfiles-dev:/var/www/html/files
@@ -12,21 +12,33 @@ services:
       - PKP_DATABASE_HOST=ojsdb-dev
       - PKP_DATABASE_CONNECTION_CHARSET=utf8mb4
       - PKP_DATABASE_COLLATION=utf8mb4_unicode_ci
+      - PKP_I18N_LOCALE=en
       - PKP_I18N_CONNECTION_CHARSET=utf8mb4
-      - PKP_GENERAL_INSTALLED=yes
+      - PKP_GENERAL_INSTALLED=On
       - PKP_GENERAL_BASE_URL=https://dev.journal.tei-c.org
       - PKP_EMAIL_DEFAULT=smtp
-      - PKP_EMAIL_SMTP=On
+      - PKP_EMAIL_SMTP=On      
       - PKP_EMAIL_SMTP_SERVER=relay.huma-num.fr
       - PKP_EMAIL_SMTP_PORT=25
+# gmail start
+#      - PKP_EMAIL_SMTP_SERVER=smtp.gmail.com
+#      - PKP_EMAIL_SMTP_PORT=465
+#      - PKP_EMAIL_SMTP_AUTH=ssl
+# gmail end      
       - PKP_EMAIL_REQUIRE_VALIDATION=On
+      
       - PKP_EMAIL_FORCE_DMARC_COMPLIANT_FROM=On
       - PKP_EMAIL_DMARC_COMPLIANT_FROM_DISPLAYNAME='%n via %s'
+      - PKP_EMAIL_ALLOW_ENVELOPE_SENDER=On
       - PKP_EMAIL_FORCE_DEFAULT_ENVELOPE_SENDER=On
-      - PKP_EMAIL_DEFAULT_ENVELOPE_SENDER=ojs@journal.tei-c.org
+      - PKP_EMAIL_DEFAULT_ENVELOPE_SENDER=journal@tei-c.org
+
       - PKP_CAPTCHA_RECAPTCHA=On
       - PKP_CAPTCHA_ON_REGISTER=On
       - PKP_GENERAL_SCHEDULED_TASKS=On
+      - PKP_GENERAL_SANDBOX=Off
+      - PKP_GENERAL_ALLOWED_HOSTS='["dev.journal.tei-c.org"]'
+      - PKP_INVITATIONS_EXPIRATION_DAYS=14
       - PKP_SECURITY_ALLOWED_HTML="a[href|target|title],em,strong,cite,code,ul,ol,li[class],dl,dt,dd,b,i,u,img[src|alt],sup,sub,br,p"
       - VIRTUAL_HOST=dev.journal.tei-c.org
       - LETSENCRYPT_HOST=dev.journal.tei-c.org
@@ -46,6 +58,14 @@ services:
         target: PKP_CAPTCHA_RECAPTCHA_PUBLIC_KEY
       - source: ojs_salt
         target: PKP_SECURITY_SALT
+      - source: ojs_appkey
+        target: PKP_GENERAL_APP_KEY
+# gmail start
+#      - source: ojs_gmail_email
+#        target: PKP_EMAIL_SMTP_USERNAME
+#      - source: ojs_gmail_passwd
+#        target: PKP_EMAIL_SMTP_PASSWORD
+# gmail end        
 
   ojsdb-dev:
     image: mariadb:10
@@ -83,3 +103,10 @@ secrets:
     file: /data/docker-secrets/ojs-recaptcha-public-key
   ojs_salt:
     file: /data/docker-secrets/ojs-salt-dev
+  ojs_appkey:
+    file: /data/docker-secrets/ojs-appkey-dev
+# gmail start
+#  ojs_gmail_email:
+#    file: /data/docker-secrets/ojs-gmail-email-dev
+#  ojs_gmail_passwd:
+#    file: /data/docker-secrets/ojs-gmail-password-dev
