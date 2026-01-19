@@ -36,7 +36,7 @@ services:
       - PKP_CAPTCHA_RECAPTCHA=On
       - PKP_CAPTCHA_ON_REGISTER=On
       - PKP_GENERAL_SCHEDULED_TASKS=On
-      - PKP_GENERAL_SANDBOX=Off
+      - PKP_GENERAL_SANDBOX=On
       - PKP_GENERAL_ALLOWED_HOSTS='["dev.journal.tei-c.org"]'
       - PKP_INVITATIONS_EXPIRATION_DAYS=14
       - PKP_SECURITY_ALLOWED_HTML="a[href|target|title],em,strong,cite,code,ul,ol,li[class],dl,dt,dd,b,i,u,img[src|alt],sup,sub,br,p"
@@ -68,9 +68,9 @@ services:
 # gmail end        
 
   ojsdb-dev:
-    image: mariadb:10
+    image: mariadb:10.11
     container_name: ojsdb-dev
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    command: [ "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "--init-connect=SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci", "--character-set-client-handshake=FALSE"]
     volumes:
       - /data/docker-volumes/ojsdb-dev:/var/lib/mysql
       - /data/tmp:/docker-entrypoint-initdb.d:ro

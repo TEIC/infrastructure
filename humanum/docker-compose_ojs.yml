@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   ojs:
-    image: teic/docker-pkp-ojs:3.5.0
+    image: teic/docker-pkp-ojs:latest
     container_name: ojs
     volumes:
       - /data/docker-volumes/ojsfiles:/var/www/html/files
@@ -55,9 +55,9 @@ services:
         target: PKP_GENERAL_APP_KEY      
 
   ojsdb:
-    image: mariadb:10
+    image: mariadb:10.11
     container_name: ojsdb
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    command: [ "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "--init-connect=SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci", "--character-set-client-handshake=FALSE"]
     volumes:
       - /data/docker-volumes/ojsdb:/var/lib/mysql
       - /data/tmp:/docker-entrypoint-initdb.d:ro
