@@ -20,11 +20,6 @@ case $SERVICE in
     CONTAINERS=("roma")
     COMPOSE_FILE=docker-compose_roma.yml
     ;;
-    oxgarage)
-    IMAGES=("teic/oxgarage")
-    CONTAINERS=("oxgarage")
-    COMPOSE_FILE=docker-compose_oxgarage.yml
-    ;;
     teigarage)
     IMAGES=("teic/teigarage")
     CONTAINERS=("teigarage")
