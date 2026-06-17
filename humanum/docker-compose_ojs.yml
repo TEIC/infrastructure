@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   ojs:
     image: teic/docker-pkp-ojs:latest

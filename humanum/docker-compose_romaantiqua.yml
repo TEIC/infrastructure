@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   roma:
     image: teic/roma
@@ -27,4 +25,3 @@ networks:
   default:
     external:
       name: tei_net
-
