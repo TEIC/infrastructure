@@ -1,3 +1,5 @@
+name: teiwebsite
+
 services:
   website:
     image: teic/website:dockerize
@@ -25,6 +27,5 @@ services:
       AUTOHEAL_CONTAINER_LABEL: autoheal
 
 networks:
-  default:
-    external:
-      name: tei_net
+  tei_net:
+    external: true
