@@ -6,6 +6,7 @@ services:
     container_name: website
     volumes:
       - /data/Vault/P5/current:/usr/local/apache2/htdocs/release:ro
+      - /data/Vault:/usr/local/apache2/htdocs/Vault:ro
     environment:
       - VIRTUAL_HOST=tei-c.org,www.tei-c.org
       - LETSENCRYPT_HOST=tei-c.org,www.tei-c.org
