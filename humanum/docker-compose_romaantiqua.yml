@@ -15,6 +15,9 @@ services:
       - VIRTUAL_PORT=80
       - LETSENCRYPT_EMAIL=stadler@edirom.de
     restart: unless-stopped
+    networks:
+      - tei_net
+      - isolated
 
   xquery4roma:
     image: teic/xquery4roma
@@ -22,7 +25,11 @@ services:
     environment:
       - P5SUBSET_URL=https://www.tei-c.org/Vault/P5/current/xml/tei/odd/p5subset.xml
     restart: unless-stopped
+    networks:
+      - isolated
 
 networks:
   tei_net:
     external: true
+  isolated:
+    internal: true
