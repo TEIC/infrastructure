@@ -5,8 +5,8 @@ services:
     volumes:
       - /data/Vault/P5/current:/usr/local/apache2/htdocs/release:ro
     environment:
-      - VIRTUAL_HOST=tei-c.org,www.tei-c.org,tei-c.huma-num.fr
-      - LETSENCRYPT_HOST=tei-c.org,www.tei-c.org,tei-c.huma-num.fr
+      - VIRTUAL_HOST=tei-c.org,www.tei-c.org
+      - LETSENCRYPT_HOST=tei-c.org,www.tei-c.org
       - VIRTUAL_PORT=80
       - LETSENCRYPT_EMAIL=stadler@edirom.de
     restart: unless-stopped
