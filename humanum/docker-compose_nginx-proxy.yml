@@ -1,5 +1,3 @@
-version: '3.5'
-
 services:
   nginx-proxy:
     image: nginxproxy/nginx-proxy:1.7-alpine
@@ -13,9 +11,16 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - /data/docker-volumes/tei-additional-nginx.conf:/etc/nginx/conf.d/tei-additional-nginx.conf:ro
       - nginx-proxy-certs:/etc/nginx/certs:ro
       - nginx-proxy-html:/usr/share/nginx/html
+    configs:
+      - source: nginx_additional_conf
+        target: /etc/nginx/vhost.d/teigarage.tei-c.org
+      - source: nginx_additional_conf
+        target: /etc/nginx/vhost.d/oxgarage.tei-c.org
+      - source: nginx_additional_conf
+        target: /etc/nginx/vhost.d/roma.tei-c.org
+
     restart: unless-stopped
 
   acme-companion:
@@ -41,3 +46,7 @@ volumes:
 networks:
   tei:
     name: tei_net
+
+configs:
+  nginx_additional_conf:
+    content: client_max_body_size 150m;
