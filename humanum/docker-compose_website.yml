@@ -1,0 +1,30 @@
+services:
+  website:
+    image: teic/website:dockerize
+    container_name: website
+    volumes:
+      - /data/Vault/P5/current:/usr/local/apache2/htdocs/release:ro
+    environment:
+      - VIRTUAL_HOST=tei-c.org
+      - LETSENCRYPT_HOST=tei-c.org
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_EMAIL=stadler@edirom.de
+    restart: unless-stopped
+    labels:
+      autoheal: "true"
+
+  autoheal:
+    image: willfarrell/autoheal:latest
+    container_name: teiwebsite-autoheal
+    network_mode: none
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      AUTOHEAL_CONTAINER_LABEL: autoheal
+
+networks:
+  default:
+    external:
+      name: tei_net
