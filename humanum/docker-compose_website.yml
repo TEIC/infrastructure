@@ -7,6 +7,7 @@ services:
     volumes:
       - /data/Vault/P5/current:/usr/local/apache2/htdocs/release:ro
       - /data/Vault:/usr/local/apache2/htdocs/Vault:ro
+      - /data/web/tei-c.dhinstitute.ca/public_html/extra/teiinlibraries:/usr/local/apache2/htdocs/SIG/Libraries/teiinlibraries:ro
     environment:
       - VIRTUAL_HOST=tei-c.org,www.tei-c.org
       - LETSENCRYPT_HOST=tei-c.org,www.tei-c.org
