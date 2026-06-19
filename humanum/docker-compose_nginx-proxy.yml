@@ -38,6 +38,17 @@ services:
       - acme:/etc/acme.sh
     restart: unless-stopped
 
+  autoheal:
+    image: willfarrell/autoheal:latest
+    container_name: autoheal
+    network_mode: none
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      AUTOHEAL_CONTAINER_LABEL: autoheal
+
 volumes:
   nginx-proxy-certs:
   nginx-proxy-html:
