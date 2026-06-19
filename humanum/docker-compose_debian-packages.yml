@@ -1,9 +1,11 @@
+name: debian-packages
+
 services:
   debian-packages:
     image: nginx:alpine
     container_name: debian-packages
     volumes:
-      - /data/debian-packages:/usr/share/nginx/html/deb:ro
+      - /data/TEI-apt-repo:/usr/share/nginx/html/deb:ro
     environment:
       - VIRTUAL_HOST=packages.tei-c.org
       - LETSENCRYPT_HOST=packages.tei-c.org
@@ -12,6 +14,5 @@ services:
     restart: unless-stopped
 
 networks:
-  default:
-    external:
-      name: tei_net
+  tei_net:
+    external: true
