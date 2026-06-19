@@ -2,7 +2,7 @@ name: teiwebsite
 
 services:
   website:
-    image: teic/website:dockerize
+    image: teic/website:latest
     container_name: website
     volumes:
       - /data/Vault/P5/current:/usr/local/apache2/htdocs/release:ro
