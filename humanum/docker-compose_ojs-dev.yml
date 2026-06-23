@@ -1,3 +1,5 @@
+name: ojs-dev
+
 services:
   ojs-dev:
     image: teic/docker-pkp-ojs:3.5.0
@@ -43,6 +45,9 @@ services:
       - VIRTUAL_PORT=80
       - LETSENCRYPT_EMAIL=stadler@edirom.de
     restart: unless-stopped
+    networks:
+      - tei_net
+      - isolated
     secrets:
       - source: db_passwd
         target: PKP_DATABASE_PASSWORD
@@ -71,22 +76,26 @@ services:
     command: [ "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "--init-connect=SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci", "--character-set-client-handshake=FALSE"]
     volumes:
       - /data/docker-volumes/ojsdb-dev:/var/lib/mysql
-      - /data/tmp:/docker-entrypoint-initdb.d:ro
+      # only needed for the first init
+      #- /data/tmp:/docker-entrypoint-initdb.d:ro
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_USER_FILE=/run/secrets/db_username
       - MYSQL_DATABASE_FILE=/run/secrets/db_name
       - MYSQL_PASSWORD_FILE=/run/secrets/db_passwd
     restart: unless-stopped
+    networks:
+      - isolated
     secrets:
       - source: db_passwd
       - source: db_username
       - source: db_name
 
 networks:
-  default:
-    external:
-      name: tei_net
+  tei_net:
+    external: true
+  isolated:
+    internal: true
 
 secrets:
   db_passwd:
