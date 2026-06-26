@@ -3,7 +3,10 @@ services:
     image: nginxproxy/nginx-proxy:1.7-alpine
     container_name: nginx-proxy
     networks:
-      - tei
+      tei_net:
+        # pin the container to a fixed ip address
+        # so downstream containers can set that address as trusted proxy
+        ipv4_address: 172.20.0.2
     environment:
       - ENABLE_IPV6=true
     ports:
@@ -27,7 +30,7 @@ services:
     image: nginxproxy/acme-companion
     container_name: acme-companion
     networks:
-      - tei
+      - tei_net
     environment:
       - DEFAULT_EMAIL=stadler@edirom.de
       - NGINX_PROXY_CONTAINER=nginx-proxy
@@ -67,8 +70,12 @@ volumes:
   acme:
 
 networks:
-  tei:
+  tei_net:
     name: tei_net
+    ipam:
+      config:
+        # set a fixed subnet for the tei network
+        - subnet: "172.20.0.0/24"
 
 configs:
   nginx_additional_conf:
