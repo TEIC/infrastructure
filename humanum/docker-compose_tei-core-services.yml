@@ -1,3 +1,7 @@
+# This docker compose file provides core services for the TEi infrastructure.
+# This includes the nginx proxy and letsencrypt companion, as well as autoheal and watchtower.
+name: tei-core-services
+
 services:
   nginx-proxy:
     image: nginxproxy/nginx-proxy:1.11-alpine
