@@ -10,7 +10,7 @@ services:
       tei_net:
         # pin the container to a fixed ip address
         # so downstream containers can set that address as trusted proxy
-        ipv4_address: 172.20.0.2
+        ipv4_address: 172.20.0.22
     environment:
       - ENABLE_IPV6=true
     ports:
