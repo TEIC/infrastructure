@@ -27,7 +27,10 @@ services:
         target: /etc/nginx/vhost.d/oxgarage.tei-c.org
       - source: nginx_additional_conf
         target: /etc/nginx/vhost.d/roma.tei-c.org
-
+      - source: nginx_additional_conf
+        target: /etc/nginx/vhost.d/journal.tei-c.org
+      - source: nginx_additional_conf
+        target: /etc/nginx/vhost.d/dev.journal.tei-c.org
     restart: unless-stopped
 
   acme-companion:
