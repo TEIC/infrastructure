@@ -28,8 +28,9 @@ service stacks:
   unhealthy.  
   It is **not** on `tei_net` (`network_mode: none`) and works via 
   `/var/run/docker.sock`.
-  > [!IMPORTANT]
-  > Services need a Docker healthcheck set up for this to work.
+> [!IMPORTANT]  
+> Services need a [Docker healthcheck instruction](https://dockerbuild.com/reference/healthcheck)
+> for the autoheal feature to work.
 
 - **`watchtower`**  
   Polls for newer container images every 30 minutes 
