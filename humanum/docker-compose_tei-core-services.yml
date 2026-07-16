@@ -17,20 +17,14 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - /data/docker-volumes/tei-additional-nginx.conf:/etc/nginx/vhost.d/teigarage.tei-c.org:ro
+      - /data/docker-volumes/tei-additional-nginx.conf:/etc/nginx/vhost.d/oxgarage.tei-c.org:ro
+      - /data/docker-volumes/tei-additional-nginx.conf:/etc/nginx/vhost.d/roma.tei-c.org:ro
+      - /data/docker-volumes/tei-additional-nginx.conf:/etc/nginx/vhost.d/journal.tei-c.org:ro
+      - /data/docker-volumes/tei-additional-nginx.conf:/etc/nginx/vhost.d/dev.journal.tei-c.org:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - nginx-proxy-certs:/etc/nginx/certs:ro
       - nginx-proxy-html:/usr/share/nginx/html
-    configs:
-      - source: nginx_additional_conf
-        target: /etc/nginx/vhost.d/teigarage.tei-c.org
-      - source: nginx_additional_conf
-        target: /etc/nginx/vhost.d/oxgarage.tei-c.org
-      - source: nginx_additional_conf
-        target: /etc/nginx/vhost.d/roma.tei-c.org
-      - source: nginx_additional_conf
-        target: /etc/nginx/vhost.d/journal.tei-c.org
-      - source: nginx_additional_conf
-        target: /etc/nginx/vhost.d/dev.journal.tei-c.org
     restart: unless-stopped
 
   acme-companion:
@@ -83,7 +77,3 @@ networks:
       config:
         # set a fixed subnet for the tei network
         - subnet: "172.20.0.0/24"
-
-configs:
-  nginx_additional_conf:
-    content: client_max_body_size 150m;
