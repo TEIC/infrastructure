@@ -28,7 +28,8 @@ service stacks:
   unhealthy.  
   It is **not** on `tei_net` (`network_mode: none`) and works via 
   `/var/run/docker.sock`.
-  NB, services need a Docker healthcheck set up for this to work.
+  > [!IMPORTANT]
+  > Services need a Docker healthcheck set up for this to work.
 
 - **`watchtower`**  
   Polls for newer container images every 30 minutes 
@@ -40,7 +41,7 @@ service stacks:
 ### How request routing works
 
 1. Public DNS points hostnames (e.g. `tei-c.org`, `journal.tei-c.org`) to this server.
-2. Incoming HTTPS traffic reaches `nginx-proxy` on host ports `80/443`.
+2. Incoming HTTP(S) traffic reaches `nginx-proxy` on host ports `80/443`.
 3. `nginx-proxy` forwards requests to the target container on `tei_net` based on `VIRTUAL_HOST`.
 4. Certificates are provisioned/renewed by `acme-companion`.
 
@@ -94,7 +95,15 @@ graph TB
         end
 
         subgraph OJS_Svc["OJS Service"]
-            OJS["<b>ojs</b><br/>PKP-OJS"]
+            OJS["<b>journal</b><br/>PKP-OJS"]
+        end
+
+        subgraph VAULT_Svc["Vault Service"]
+            VAULT["<b>vault</b><br/>TEI Vault"]
+        end
+
+        subgraph DEBIAN_Svc["Debian Packages Service"]
+            DEBIAN["<b>deb</b><br/>Debian Packages"]
         end
     end
 
@@ -116,6 +125,8 @@ graph TB
     NP -->|HTTP/80| ROMA
     NP -->|HTTP/8081| TG
     NP -->|HTTP/80| OJS
+    NP -->|HTTP/80| VAULT
+    NP -->|HTTP/80| DEBIAN
     NP -.->|communicate| ACME
 
     %% Internal connections
@@ -136,7 +147,7 @@ graph TB
 
     class Users internet
     class NP gateway
-    class WS,WIKI,ROMA,TG,OJS,ACME service
+    class WS,WIKI,ROMA,TG,OJS,ACME,VAULT,DEBIAN service
     class OJSDB,WIKIDB database
     class WH,AH management
     class DockerDaemon daemon
