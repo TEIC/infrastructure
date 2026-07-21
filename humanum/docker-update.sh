@@ -10,11 +10,6 @@ COMPOSE_FILE=""
 SERVICE=$1
 
 case $SERVICE in
-    romaantiqua)
-    IMAGES=("teic/xquery4roma" "teic/roma")
-    CONTAINERS=("xquery4roma" "romaantiqua")
-    COMPOSE_FILE=docker-compose_romaantiqua.yml
-    ;;
     roma)
     IMAGES=("teic/romajs")
     CONTAINERS=("roma")
