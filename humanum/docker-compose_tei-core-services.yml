@@ -26,6 +26,11 @@ services:
       - nginx-proxy-certs:/etc/nginx/certs:ro
       - nginx-proxy-html:/usr/share/nginx/html
     restart: unless-stopped
+    logging:
+        driver: "local"
+        options:
+            max-size: "1G"
+            max-file: "10"
 
   acme-companion:
     image: nginxproxy/acme-companion
