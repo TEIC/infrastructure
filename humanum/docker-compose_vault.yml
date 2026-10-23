@@ -6,6 +6,7 @@ services:
     container_name: vault
     volumes:
       - /data/Vault:/usr/share/nginx/html:ro
+      - ./vault.conf:/etc/nginx/conf.d/default.conf:ro
     environment:
       - VIRTUAL_HOST=vault.tei-c.org
       - LETSENCRYPT_HOST=vault.tei-c.org
@@ -14,14 +15,7 @@ services:
     restart: unless-stopped
     networks:
       - tei_net
-    configs:
-      - source: nginx_config
-        target: /etc/nginx/conf.d/default.conf
 
 networks:
   tei_net:
     external: true
-
-configs:
-  nginx_config:
-    file: ./vault.conf
