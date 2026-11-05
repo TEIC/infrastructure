@@ -13,6 +13,10 @@ Services that can be mirrored include:
 > locations: as a subfolder of the TEI website (`tei-c.org/Vault`) and as a 
 > standalone service (`vault.tei-c.org`).
 
+If you want to run a mirror of (all or some) TEI services please get in 
+touch with the TEI Consortium infrastructure group at 
+[infrastructuregroup@tei-c.org.](mailto:infrastructuregroup@tei-c.org).
+
 ## Prerequisites
 - Docker and Docker Compose installed on the host
 - A domain name and DNS records set up for the mirror
@@ -28,7 +32,7 @@ and requires a server with more CPU and RAM.
 For mirroring the TEI Vault you'll need ~100GB of storage space.
 The other TEI services have smaller storage requirements that can be 
 estimated by the size of the Docker images.
-That sais, you should plan for additional space for logs that can grow over 
+That said, you should plan for additional space for logs that can grow over 
 time, especially when your mirror receives a lot of traffic.
 
 ## DNS entries
@@ -44,6 +48,15 @@ SSL certificates are required for the services to be reachable via HTTPS and
 are to be managed by the institution running the mirror.
 The recommended way to obtain SSL certificates is to use the 
 `acme-companion` service that is part of the TEI core stack.
+
+## Running services
+The Docker Compose files for the TEI services from the `humanum` directory 
+can be used as a template to run the services on your own host.
+You will need to adapt the `VIRTUAL_HOST`, `LETSENCRYPT_HOST`, and 
+`LETSENCRYPT_EMAIL` environment variables in the compose files to match 
+your mirror's domain names.
+Also, when volumes are used to persist data (e.g. for the TEI Vault), you will 
+need to adapt the volume paths to match your host's filesystem.
 
 ## Updating the mirror
 The TEI core stack includes the `watchtower` service that automatically updates
