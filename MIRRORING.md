@@ -51,8 +51,10 @@ The recommended way to obtain SSL certificates is to use the
 `acme-companion` service that is part of the TEI core stack.
 
 ## Running services
-The Docker Compose files for the TEI services from the `humanum` directory 
-can be used as a template to run the services on your own host.
+There are Docker Compose files (which are written in YAML) in the 
+[humanum directory](./humanum) at the root level of this repository. 
+Those files should be used as templates to run the desired services on your 
+own host.
 You will need to adapt the `VIRTUAL_HOST`, `LETSENCRYPT_HOST`, and 
 `LETSENCRYPT_EMAIL` environment variables in the compose files to match 
 your mirror's domain names.
