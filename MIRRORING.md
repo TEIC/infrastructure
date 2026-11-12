@@ -15,7 +15,7 @@ Services that can be mirrored include:
 
 If you want to run a mirror of (all or some) TEI services please get in 
 touch with the TEI Consortium infrastructure group at 
-[infrastructuregroup@tei-c.org.](mailto:infrastructuregroup@tei-c.org).
+[infrastructuregroup@tei-c.org](mailto:infrastructuregroup@tei-c.org).
 
 ## Prerequisites
 - Docker and Docker Compose installed on the host
