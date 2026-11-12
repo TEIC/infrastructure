@@ -6,8 +6,9 @@ Scripts and tools for running the TEI infrastructure.
 
 The directory `humanum` contains Docker Compose files for TEI services 
 running on the Huma-Num host.  
-This serves a) as documentation of the TEI infrastructure setup at our 
-Huma-Num host and b) as a template for running TEI services on other hosts.
+These Docker Compose files serve as a) as documentation of the TEI
+infrastructure setup at our Huma-Num host and b) as a template for running TEI 
+services on other hosts.
 If you want to run a mirror of (all or some) TEI services please have a look 
 at [MIRRORING.md](MIRRORING.md).
 
