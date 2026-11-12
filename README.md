@@ -6,8 +6,11 @@ Scripts and tools for running the TEI infrastructure.
 
 The directory `humanum` contains Docker Compose files for TEI services 
 running on the Huma-Num host.  
-Most public services attach to the shared external network `tei_net` and 
-are exposed through a central reverse proxy.
+These Docker Compose files serve as a) as documentation of the TEI
+infrastructure setup at our Huma-Num host and b) as a template for running TEI 
+services on other hosts.
+If you want to run a mirror of (all or some) TEI services please have a look 
+at [MIRRORING.md](MIRRORING.md).
 
 ### Core stack (`docker-compose_tei-core-services.yml`)
 
@@ -63,6 +66,9 @@ Optional resilience:
   `WATCHTOWER_DISABLE_CONTAINERS` env variable.
 
 ## Architectural overview
+
+Most public services attach to the shared external network `tei_net` and
+are exposed through a central reverse proxy.
 
 ```mermaid
 graph TB
