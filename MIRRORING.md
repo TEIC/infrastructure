@@ -19,8 +19,9 @@ touch with the TEI Consortium infrastructure group at
 
 ## Prerequisites
 - Docker and Docker Compose installed on the host
-- A domain name and DNS records set up for the mirror
-- SSL certificates for the domain
+- A domain name (confirmed by the infrastructure group) and DNS records set up 
+  for the mirror (see section "DNS entries" below)
+- SSL certificates for the domain (see section "SSL certificates" below)
 
 ### Compute requirements
 Roma, the TEI vault, and the TEI website are webservers serving static content 
