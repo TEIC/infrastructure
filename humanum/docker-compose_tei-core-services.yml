@@ -23,6 +23,7 @@ services:
       - /data/docker-volumes/tei-additional-nginx.conf:/etc/nginx/vhost.d/roma.tei-c.org:ro
       - /data/docker-volumes/tei-additional-nginx.conf:/etc/nginx/vhost.d/journal.tei-c.org:ro
       - /data/docker-volumes/tei-additional-nginx.conf:/etc/nginx/vhost.d/dev.journal.tei-c.org:ro
+      - ./default_server.conf:/etc/nginx/conf.d/00-catchall.conf:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - nginx-proxy-certs:/etc/nginx/certs:ro
       - nginx-proxy-html:/usr/share/nginx/html
